@@ -13,6 +13,7 @@
 .home h2 {
   margin: 0;
 }
+
 .home-logo {
   height: 80px;
 }
@@ -25,6 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 999;
 }
 
 .home-header ul {
@@ -37,9 +39,19 @@
 
 .home-header ul li {
   color: #000;
-  padding-left: 15px;
+  padding: 0 12px;
   font-weight: bold;
 }
+
+.home-header ul li a {
+  cursor: pointer;
+}
+
+.home-header ul li.active a {
+  border-bottom: 2px solid #000;
+
+}
+
 .home-intro {
   font-size: large;
 }
@@ -57,18 +69,16 @@
   display: flex;
 }
 
-.cabinet-arrows {
-  cursor: pointer;
-  position: absolute;
-  top: 200px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .cabinet-arrows p {
+  cursor: pointer;
   border: 2px solid #000;
   letter-spacing: .09em;
   padding: 10px;
+  position: absolute;
+  top: 50%;
+  z-index: 999;
+}
+
+.cabinet-arrows p:last-child {
+  right: 0;
 }

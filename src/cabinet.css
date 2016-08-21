@@ -1,13 +1,67 @@
+
 .cabinet {
   cursor: pointer;
   border: 2px solid black;
   padding: 60px 20px;
   font-size: .675em;
+  position: relative;
   width: 25%;
 }
 
-.cabinet.active {
-  border: 2px solid pink;
-  background: pink;
-  color: white;
+.cabinet .door-layer,
+.cabinet .top-layer,
+.cabinet .bottom-layer {
+  display: none;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 25%;
+  height: 100%;
+}
+
+.cabinet .door-layer {
+  background: #ccc;
+}
+
+.cabinet .top-layer {
+  background: url(cabinet.png) center center no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.cabinet .bottom-layer {
+  background: #ddd;
+}
+
+.cabinet .bottom-layer .door {
+  background: url(door.png) center center no-repeat;
+  background-size: contain;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: -58%;
+  height: 100%;
+}
+
+.cabinet .door-layer.active {
+  display: block;
+}
+
+.cabinet .top-layer.active {
+  display: block;
+}
+
+.cabinet .bottom-layer.active {
+  display: block;
+}
+
+.cabinet.outer-active .top-layer {
+  display: block;
+}
+
+.cabinet.inner-active .bottom-layer {
+  display: block;
 }

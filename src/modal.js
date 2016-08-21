@@ -5,18 +5,26 @@ class Modal extends Component {
   render() {
     let content = null;
     let activeClass = null;
-    if (this.props.id) {
+    if (this.props.id === 10) {
       activeClass = 'active';
       content = (
-        <h5>Modal window</h5>
+        <div>
+          <h5>Subscribe to our newsletter here:</h5>
+          <h5>Follow us here and here</h5>
+        </div>
       );
     }
 
     return (
       <div className={'modal-container ' + activeClass}>
+        <div onClick={this.closeModal.bind(this)} className="close"><h2>x</h2></div>
         {content}
       </div>
     );
+  }
+
+  closeModal() {
+    this.props.closeModal();
   }
 }
 

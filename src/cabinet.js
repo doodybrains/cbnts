@@ -2,21 +2,38 @@ import React, { Component } from 'react';
 import './cabinet.css';
 
 class Cabinet extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showInnerCabinet: false
+    };
+  }
+
   render() {
-    let activeClass = null;
-    if (this.props.isOpen === this.props.id) {
-      activeClass = 'active';
-    }
+    const active = this.state.showInnerCabinet;
+    const activeClass = active ? 'inner-active' : 'outer-active';
+    const thisId = this.props.id;
 
     return (
       <div onClick={this.handleClick.bind(this)} className={'cabinet ' + activeClass}>
-        <p>{this.props.title}</p>
+        <div className="door-layer">
+          <p>door layer</p>
+        </div>
+        <div className="top-layer">
+          <p>{this.props.title}</p>
+        </div>
+        <div className="bottom-layer">
+          <div><p>inside cabinet {this.props.id} image</p></div>
+          <div className="door"></div>
+        </div>
       </div>
     );
   }
 
   handleClick() {
-    this.props.openCabinet(this.props.id);
+    this.setState({
+      showInnerCabinet: !this.state.showInnerCabinet
+    });
   }
 }
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import CabinetContainer from './cabinet-container';
+import MainLinks from './main-links';
+import Modal from './modal';
 
 const homeCabinets = [
   {id: '1', title: 'cabinet one'},
@@ -67,7 +69,8 @@ class App extends Component {
     super(props);
     this.state = {
       cabinetState: 0,
-      activeSet: 1
+      activeSet: 1,
+      modalOpen: 0
     };
   }
 
@@ -77,11 +80,7 @@ class App extends Component {
       <div className="home">
         <div className="home-header">
           <h2>THE WOMAN IN THE CABINET</h2>
-          <ul>
-            <li>Cast</li>
-            <li>Story</li>
-            <li>TBA</li>
-          </ul>
+          <MainLinks activeSet={this.state.activeSet} goToSection={this.goToSection.bind(this)} openModal={this.openModal.bind(this)} />
         </div>
         <div className="cabinet-arrows">
           <p onClick={this.goToPrevSet.bind(this)}>PREV</p>
@@ -91,6 +90,8 @@ class App extends Component {
         <CabinetContainer id="2" activeSet={this.state.activeSet} items={castCabinets} />
         <CabinetContainer id="3" activeSet={this.state.activeSet} items={storyCabinets} />
         <CabinetContainer id="4" activeSet={this.state.activeSet} items={tbaCabinets} />
+
+        <Modal id={this.state.modalOpen} closeModal={this.closeModal.bind(this)} />
       </div>
     );
   }
@@ -129,10 +130,28 @@ class App extends Component {
     });
   }
 
+  goToSection(id) {
+    this.setState({
+      activeSet: id
+    });
+  }
+
   setCabinetState(id) {
     let activeCabinet = id;
     this.setState({
       cabinetState: activeCabinet
+    });
+  }
+
+  openModal(id) {
+    this.setState({
+      modalOpen: id
+    });
+  }
+
+  closeModal() {
+    this.setState({
+      modalOpen: 0
     });
   }
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Cabinet from './cabinet';
 
 class CabinetContainer extends Component {
-
   render() {
     const items = this.props.items.map(item => {
       return (
