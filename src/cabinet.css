@@ -3,11 +3,17 @@
   cursor: pointer;
   border: 2px solid black;
   padding: 60px 20px;
+  min-height: 200px;
   font-size: .675em;
   position: relative;
-  width: 25%;
+  width: 100%;
 }
-
+@media only screen and (min-width : 720px) {
+  .cabinet {
+    min-height: none;
+    width: 25%;
+  }
+}
 .cabinet .door-layer,
 .cabinet .top-layer,
 .cabinet .bottom-layer {
