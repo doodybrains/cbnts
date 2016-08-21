@@ -1,4 +1,9 @@
+.modal-container {
+  display: none;
+}
+
 .modal-container.active {
+  display: block;
   cursor: pointer;
   border: 5px solid yellow;
   padding: 60px 20px;
@@ -11,4 +16,10 @@
   background: rgba(255,255,255, .95);
   height: 100%;
   z-index: 9999;
+}
+
+.modal-container.active .close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
 }
