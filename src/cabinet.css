@@ -1,0 +1,13 @@
+.cabinet {
+  cursor: pointer;
+  border: 2px solid black;
+  padding: 60px 20px;
+  font-size: .675em;
+  width: 25%;
+}
+
+.cabinet.active {
+  border: 2px solid pink;
+  background: pink;
+  color: white;
+}
