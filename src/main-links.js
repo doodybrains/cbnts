@@ -16,14 +16,21 @@ class Cabinet extends Component {
       cast = 'active';
     }
     return (
-      <ul>
-        <li onClick={this.goToStory.bind(this)} className={story}><a>The Story</a></li>
-        <li onClick={this.goToCharacters.bind(this)} className={characters}><a>Characters</a></li>
-        <li onClick={this.goToCast.bind(this)} className={cast}><a>Cast + Crew</a></li>
-        <li><a>Comic Book</a></li>
-        <li onClick={this.openModal.bind(this)}><a>Follow Us!</a></li>
-      </ul>
+      <div className="home-header">
+        <a className="wordmark" onClick={this.goToHome.bind(this)}>THE WOMAN IN THE CABINET</a>
+        <ul>
+          <li onClick={this.goToStory.bind(this)} className={story}><a>The Story</a></li>
+          <li onClick={this.goToCharacters.bind(this)} className={characters}><a>Characters</a></li>
+          <li onClick={this.goToCast.bind(this)} className={cast}><a>Cast + Crew</a></li>
+          <li><a href="https://s3.amazonaws.com/womaninthecabinet.com/Woman+in+the+Cabinet+Comic+Book+(small-size).pdf" target="_blank">Comic Book</a></li>
+          <li onClick={this.openModal.bind(this)}><a>Follow Us!</a></li>
+        </ul>
+      </div>
     );
+  }
+
+  goToHome() {
+    this.props.goToSection(1);
   }
 
   goToStory() {

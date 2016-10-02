@@ -11,8 +11,9 @@ class CabinetContainer extends Component {
 
     const isActive = parseInt(this.props.id.substring(this.props.id.length - 1), 10) === this.props.activeSet;
     const activeClass = isActive ? 'active' : '';
+    const cabinetName = this.props.name;
     return (
-      <div className={'cabinet-container ' + activeClass}>
+      <div className={'cabinet-container ' + cabinetName + ' ' + activeClass}>
         {items}
       </div>
     );

@@ -3,23 +3,47 @@
 }
 
 .modal-container.active {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  border: 5px solid yellow;
-  padding: 60px 20px;
+  padding: 10px 30px;
   position: absolute;
   top: 0;
   width: 100%;
   left: 0;
   right: 0;
   color: #000;
-  background: rgba(255,255,255, .95);
+  background: rgba(255,255,255, .97);
   height: 100%;
   z-index: 9999;
 }
 
 .modal-container.active .close {
   position: absolute;
-  top: 30px;
-  right: 30px;
+  top: 10px;
+  right: 10px;
+}
+
+.modal-container.active .close p {
+  font-weight: normal;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.follow-block {
+  width: 80%;
+}
+.follow-block .newsletter {
+  border: 2px dotted black;
+  padding: 40px 0 80px 0;
+  margin: 0 auto 30px auto;
+  width: 60%;
+}
+
+.follow-block .social-block {
+  border: 2px dotted black;
+  padding: 40px 0 80px 0;
+  margin: 0 auto;
+  width: 60%;
 }
