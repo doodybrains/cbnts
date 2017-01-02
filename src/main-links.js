@@ -8,7 +8,6 @@ class Cabinet extends Component {
     var characters;
     var cast;
     if (this.props.activeSet === 2) {
-      console.log('yes');
       story = 'active';
     } else if (this.props.activeSet === 3) {
       characters = 'active';

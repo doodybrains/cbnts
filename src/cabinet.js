@@ -12,7 +12,6 @@ class Cabinet extends Component {
   render() {
     const active = this.state.showInnerCabinet;
     const activeClass = active ? 'inner-active' : 'outer-active';
-    const thisId = this.props.id;
 
     return (
       <div onClick={this.handleClick.bind(this)} className={'cabinet ' + activeClass}>

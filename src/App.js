@@ -3,6 +3,9 @@ import './App.css';
 import CabinetContainer from './cabinet-container';
 import MainLinks from './main-links';
 import Modal from './modal';
+import next from './next.svg';
+import prev from './prev.svg';
+import Velocity from 'velocity-animate';
 
 const homeCabinets = [
   {id: '1', title: 'cabinet-one'},
@@ -63,6 +66,10 @@ const tbaCabinets = [
   {id: '47', title: 'cabinet-forty-seven'},
   {id: '48', title: 'cabinet-forty-eight'}
 ];
+
+let current = 1;
+const length = 4;
+
 class App extends Component {
 
   constructor(props) {
@@ -74,8 +81,19 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+
+
+
+    const first = document.getElementById('home');
+    const last = document.getElementById('tba');
+    const firstClone = first.cloneNode(true);
+    const lastClone = last.cloneNode(true);
+    first.parentNode.insertBefore(lastClone, first);
+    first.parentNode.appendChild(firstClone);
+  }
+
   render() {
-    console.log(this.state.activeSet);
     let slideClass = 'one';
     if (this.state.activeSet === 2) {
       slideClass = 'two';
@@ -86,14 +104,15 @@ class App extends Component {
     if (this.state.activeSet === 4) {
       slideClass = 'four';
     }
+
     return (
       <div className="home">
         <MainLinks activeSet={this.state.activeSet} goToSection={this.goToSection.bind(this)} openModal={this.openModal.bind(this)} />
         <div className="cabinet-arrows">
-          <p onClick={this.goToPrevSet.bind(this)}>PREV</p>
-          <p onClick={this.goToNextSet.bind(this)}>NEXT</p>
+          <div id="prev" onClick={this.goToPrevSet.bind(this)}><img src={prev} alt="prev" /></div>
+          <div id="next" onClick={this.goToNextSet.bind(this)}><img src={next} alt="next" /></div>
         </div>
-        <div className={'container ' + slideClass}>
+        <div id="slider" className={'container ' + slideClass}>
           <CabinetContainer id="1" name="home" activeSet={this.state.activeSet} items={homeCabinets} />
           <CabinetContainer id="2" name="cast" activeSet={this.state.activeSet} items={castCabinets} />
           <CabinetContainer id="3" name="story" activeSet={this.state.activeSet} items={storyCabinets} />
@@ -119,6 +138,8 @@ class App extends Component {
     this.setState({
       activeSet: id
     });
+
+    this.cycleSlides('next');
   }
 
 
@@ -137,18 +158,31 @@ class App extends Component {
     this.setState({
       activeSet: id
     });
+
+    this.cycleSlides('prev');
   }
+
+
+  cycleSlides(direction) {
+    const delta = (direction === 'prev') ? -1 : 1;
+    current += delta;
+    const cycle = (current === 0 || current > length);
+
+    const slider = document.getElementById('slider');
+    const slide = (-16.667 / 100) * 100;
+    const move = slide * delta;
+    Velocity(slider, {translateX: '+=' + move + '%'}, {duration: 250, easing: 'easeIn'});
+    if (cycle) {
+      current = (current === 0) ? length : 1;
+      const reset = slide * current;
+      Velocity(slider, {translateX: reset + '%'}, {duration: 0, easing: 'easeIn'});
+    }
+  }
+
 
   goToSection(id) {
     this.setState({
       activeSet: id
-    });
-  }
-
-  setCabinetState(id) {
-    let activeCabinet = id;
-    this.setState({
-      cabinetState: activeCabinet
     });
   }
 

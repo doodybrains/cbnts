@@ -7,8 +7,10 @@
     "react-scripts": "0.2.1"
   },
   "dependencies": {
+    "gsap": "^1.19.0",
     "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "react-dom": "^15.2.1",
+    "velocity-animate": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
