@@ -105,14 +105,28 @@
 }
 
 @media only screen and (min-width : 720px) {
+  #slider {
+    width: 600%;
+  }
   .container {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 600%;
+    width: 100%;
   }
-
+  #tba {
+    border: 2px solid yellow;
+  }
+  #home {
+    border: 2px solid red;
+  }
+  #cast {
+    border: 2px solid green;
+  }
+  #story {
+    border: 2px solid blue;
+  }
   .cabinet-container {
     display: flex;
     align-items: stretch;

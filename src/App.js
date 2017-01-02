@@ -82,9 +82,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-
-
-
+    const slider = document.getElementById('slider');
+    Velocity(slider, {translateX:'+=-16.667%'}, {duration: 350, easing: 'easeIn'});
     const first = document.getElementById('home');
     const last = document.getElementById('tba');
     const firstClone = first.cloneNode(true);
@@ -112,11 +111,13 @@ class App extends Component {
           <div id="prev" onClick={this.goToPrevSet.bind(this)}><img src={prev} alt="prev" /></div>
           <div id="next" onClick={this.goToNextSet.bind(this)}><img src={next} alt="next" /></div>
         </div>
-        <div id="slider" className={'container ' + slideClass}>
-          <CabinetContainer id="1" name="home" activeSet={this.state.activeSet} items={homeCabinets} />
-          <CabinetContainer id="2" name="cast" activeSet={this.state.activeSet} items={castCabinets} />
-          <CabinetContainer id="3" name="story" activeSet={this.state.activeSet} items={storyCabinets} />
-          <CabinetContainer id="4" name="tba" activeSet={this.state.activeSet} items={tbaCabinets} />
+        <div id="slider">
+          <div id="slider-wrapper" className={'container ' + slideClass}>
+            <CabinetContainer id="1" name="home" activeSet={this.state.activeSet} items={homeCabinets} />
+            <CabinetContainer id="2" name="cast" activeSet={this.state.activeSet} items={castCabinets} />
+            <CabinetContainer id="3" name="story" activeSet={this.state.activeSet} items={storyCabinets} />
+            <CabinetContainer id="4" name="tba" activeSet={this.state.activeSet} items={tbaCabinets} />
+          </div>
         </div>
 
         <Modal id={this.state.modalOpen} closeModal={this.closeModal.bind(this)} />
@@ -171,10 +172,13 @@ class App extends Component {
     const slider = document.getElementById('slider');
     const slide = (-16.667 / 100) * 100;
     const move = slide * delta;
-    Velocity(slider, {translateX: '+=' + move + '%'}, {duration: 250, easing: 'easeIn'});
+
+    Velocity(slider, {translateX: '+=' + move + '%'}, {duration: 350, easing: 'easeIn'});
     if (cycle) {
+      console.log(current);
       current = (current === 0) ? length : 1;
       const reset = slide * current;
+      console.log(current, reset);
       Velocity(slider, {translateX: reset + '%'}, {duration: 0, easing: 'easeIn'});
     }
   }
