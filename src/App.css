@@ -98,7 +98,18 @@
   background: url(iowa.jpg) center center no-repeat;
   background-size: cover;
 }
-
+.cabinet-container.story {
+  background-color: pink;
+}
+.cabinet-container.cast {
+  background-color: yellow;
+}
+.cabinet-container.book {
+  background-color: green;
+}
+.cabinet-container.follow {
+  background-color: red;
+}
 .cabinet-container.active {
   display: block;
   padding-top: 188px;
@@ -106,7 +117,7 @@
 
 @media only screen and (min-width : 720px) {
   #slider {
-    width: 600%;
+    width: 800%;
   }
   .container {
     display: flex;
@@ -127,12 +138,19 @@
   #story {
     border: 2px solid blue;
   }
+  #book {
+    border: 2px solid purple;
+  }
+  #follow {
+    border: 2px solid orange;
+  }
+
   .cabinet-container {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
     flex-wrap: wrap;
-    width: 16.6667%;
+    width: 12.5%;
     height: calc(100vh - 68px);
   }
 

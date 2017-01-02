@@ -19,10 +19,10 @@ class Cabinet extends Component {
           <p>door layer</p>
         </div>
         <div className="top-layer">
-          <p>{this.props.title}</p>
+          <p></p>
         </div>
         <div className="bottom-layer">
-          <div><p>inside cabinet {this.props.id} image</p></div>
+          <div></div>
           <div className="door"></div>
         </div>
       </div>
