@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import CabinetContainer from './cabinet-container';
 import MainLinks from './main-links';
-import Modal from './modal';
 import next from './next.svg';
 import prev from './prev.svg';
 import Velocity from 'velocity-animate';
+import {duplicateFirstLastSlides} from './slider.js';
 
 const homeCabinets = [
   {id: '1', title: 'cabinet-one'},
@@ -79,65 +79,91 @@ class App extends Component {
       activeSet: 1,
       modalOpen: 0
     };
+
+    this.goToPrevSet = this.goToPrevSet.bind(this);
+    this.goToNextSet = this.goToNextSet.bind(this);
+    this.goToSection = this.goToSection.bind(this);
   }
 
   componentDidMount() {
     const slider = document.getElementById('slider');
-    Velocity(slider, {translateX:'+=-12.5%'}, {duration: 350, easing: 'easeIn'});
     const first = document.getElementById('home');
-    const last = document.getElementById('tba');
-    const firstClone = first.cloneNode(true);
-    const lastClone = last.cloneNode(true);
-    first.parentNode.insertBefore(lastClone, first);
-    first.parentNode.appendChild(firstClone);
+    const last = document.getElementById('follow');
+
+    duplicateFirstLastSlides(slider, first, last);
   }
 
   render() {
+    const {activeSet} = this.state;
     let slideClass = 'one';
-    if (this.state.activeSet === 2) {
-      slideClass = 'two';
-    }
-    if (this.state.activeSet === 3) {
-      slideClass = 'three';
-    }
-    if (this.state.activeSet === 4) {
-      slideClass = 'four';
+
+    switch (activeSet) {
+      case 2:
+        slideClass = 'two';
+        break;
+      case 3:
+        slideClass = 'three';
+        break;
+      case 4:
+        slideClass = 'four';
+        break;
+      case 5:
+        slideClass = 'five';
+        break;
+      case 6:
+        slideClass = 'six';
+        break;
     }
 
     return (
       <div className="home">
-        <MainLinks activeSet={this.state.activeSet} goToSection={this.goToSection.bind(this)} openModal={this.openModal.bind(this)} />
+        <MainLinks activeSet={activeSet} goToSection={this.goToSection} />
+
         <div className="cabinet-arrows">
-          <div id="prev" onClick={this.goToPrevSet.bind(this)}><img src={prev} alt="prev" /></div>
-          <div id="next" onClick={this.goToNextSet.bind(this)}><img src={next} alt="next" /></div>
-        </div>
-        <div id="slider">
-          <div id="slider-wrapper" className={'container ' + slideClass}>
-            <CabinetContainer id="1" name="home" activeSet={this.state.activeSet} items={homeCabinets} />
-            <CabinetContainer id="2" name="story" activeSet={this.state.activeSet} items={storyCabinets} />
-            <CabinetContainer id="3" name="characters" activeSet={this.state.activeSet} items={castCabinets} />
-            <CabinetContainer id="4" name="cast" activeSet={this.state.activeSet} items={castCabinets} />
-            <CabinetContainer id="5" name="book" activeSet={this.state.activeSet} items={castCabinets} />
-            <CabinetContainer id="6" name="follow" activeSet={this.state.activeSet} items={tbaCabinets} />
-          </div>
+          <div id="prev" onClick={this.goToPrevSet}><img src={prev} alt="prev" /></div>
+          <div id="next" onClick={this.goToNextSet}><img src={next} alt="next" /></div>
         </div>
 
-        <Modal id={this.state.modalOpen} closeModal={this.closeModal.bind(this)} />
+        <div id="slider">
+          <div id="slider-wrapper" className={'container ' + slideClass}>
+            <CabinetContainer id="1" name="home" activeSet={activeSet} items={homeCabinets} />
+
+            <CabinetContainer id="2" name="story" activeSet={activeSet} items={storyCabinets} />
+
+            <CabinetContainer id="3" name="characters" activeSet={activeSet} items={castCabinets} />
+
+            <CabinetContainer id="4" name="cast" activeSet={activeSet} items={castCabinets} />
+
+            <CabinetContainer id="5" name="book" activeSet={activeSet} items={castCabinets} />
+
+            <CabinetContainer id="6" name="follow" activeSet={activeSet} items={tbaCabinets} />
+          </div>
+        </div>
       </div>
     );
   }
 
   goToNextSet() {
     let id = 1;
-    if (this.state.activeSet === 1) {
-      id = 2;
+
+    switch (this.state.activeSet) {
+      case 1:
+        id = 2;
+        break;
+      case 2:
+        id = 3;
+        break;
+      case 3:
+        id = 4;
+        break;
+      case 4:
+        id = 5;
+        break;
+      case 5:
+        id = 6;
+        break;
     }
-    if (this.state.activeSet === 2) {
-      id = 3;
-    }
-    if (this.state.activeSet === 3) {
-      id = 4;
-    }
+
     this.setState({
       activeSet: id
     });
@@ -147,15 +173,24 @@ class App extends Component {
 
 
   goToPrevSet() {
-    let id = 4;
-    if (this.state.activeSet === 4) {
-      id = 3;
-    }
-    if (this.state.activeSet === 3) {
-      id = 2;
-    }
-    if (this.state.activeSet === 2) {
-      id = 1;
+    let id = 6;
+
+    switch (this.state.activeSet) {
+      case 6:
+        id = 5;
+        break;
+      case 5:
+        id = 4;
+        break;
+      case 4:
+        id = 3;
+        break;
+      case 3:
+        id = 2;
+        break;
+      case 2:
+        id = 1;
+        break;
     }
 
     this.setState({
@@ -169,36 +204,31 @@ class App extends Component {
   cycleSlides(direction) {
     const delta = (direction === 'prev') ? -1 : 1;
     current += delta;
-    const cycle = (current === 0 || current > length);
 
+    const cycle = (current === 0 || current > length);
     const slider = document.getElementById('slider');
-    const slide = (-12.5 / 100) * 100;
-    const move = slide * delta;
+    const slideDistance = (-12.5 / 100) * 100;
+    const move = slideDistance * delta;
 
     Velocity(slider, {translateX: '+=' + move + '%'}, {duration: 350, easing: 'easeIn'});
+
     if (cycle) {
       current = (current === 0) ? length : 1;
-      const reset = slide * current;
-      Velocity(slider, {translateX: reset + '%'}, {duration: 0, easing: 'easeIn'});
+      const reset = slideDistance * current;
+      Velocity(slider, {translateX: reset + '%'}, {duration: 0});
     }
   }
 
 
   goToSection(id) {
+    const slider = document.getElementById('slider');
+    const slideDistance = (-12.5 / 100) * 100;
+
+    const reset = slideDistance * id;
+    Velocity(slider, {translateX: reset + '%'}, {duration: 350, easing: 'easeIn'});
+
     this.setState({
       activeSet: id
-    });
-  }
-
-  openModal(id) {
-    this.setState({
-      modalOpen: id
-    });
-  }
-
-  closeModal() {
-    this.setState({
-      modalOpen: 0
     });
   }
 }

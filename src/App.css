@@ -126,23 +126,23 @@
     position: relative;
     width: 100%;
   }
-  #tba {
-    border: 2px solid yellow;
-  }
   #home {
-    border: 2px solid red;
+    border: 12px solid red;
   }
   #cast {
-    border: 2px solid green;
+    border: 12px solid green;
+  }
+  #characters {
+    border: 12px solid pink;
   }
   #story {
-    border: 2px solid blue;
+    border: 12px solid blue;
   }
   #book {
-    border: 2px solid purple;
+    border: 12px solid purple;
   }
   #follow {
-    border: 2px solid orange;
+    border: 12px solid orange;
   }
 
   .cabinet-container {
